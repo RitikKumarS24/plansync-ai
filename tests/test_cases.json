@@ -1,0 +1,35 @@
+[
+  {
+    "test_id": "TC_01_Normal",
+    "description": "Standard 3-day load with balanced subjects",
+    "inputs": {
+      "student_name": "Ritik Kumar",
+      "subjects": "Data Structures, Algorithms, Operating Systems",
+      "exam_timeline": "DS: Nov 15, Algo: Nov 18",
+      "daily_hours": 4
+    },
+    "expected_behavior": "No time overlaps, equal distribution of core study and problem solving."
+  },
+  {
+    "test_id": "TC_02_TightDeadline",
+    "description": "Exam in 1 day with heavy syllabus",
+    "inputs": {
+      "student_name": "Ritik Kumar",
+      "subjects": "Computer Networks, DBMS, Software Engineering",
+      "exam_timeline": "CN: Tomorrow",
+      "daily_hours": 8
+    },
+    "expected_behavior": "Prioritizes CN heavily, compresses revision slots, remains valid JSON."
+  },
+  {
+    "test_id": "TC_03_LowHoursConstraint",
+    "description": "Extreme constraint: Only 1 available study hour per day",
+    "inputs": {
+      "student_name": "Ritik Kumar",
+      "subjects": "Mathematics, Physics",
+      "exam_timeline": "Maths: Nov 25",
+      "daily_hours": 1
+    },
+    "expected_behavior": "Fits compact 1-hour high-yield revision sessions without breaking schema."
+  }
+]
