@@ -1,35 +1,122 @@
 [
   {
-    "test_id": "TC_01_Normal",
-    "description": "Standard 3-day load with balanced subjects",
+    "test_id": 1,
+    "type": "Normal",
+    "description": "3-day schedule for Data Structures and Algorithms with 4 hours/day",
     "inputs": {
-      "student_name": "Ritik Kumar",
-      "subjects": "Data Structures, Algorithms, Operating Systems",
-      "exam_timeline": "DS: Nov 15, Algo: Nov 18",
-      "daily_hours": 4
+      "subjects": "Data Structures, Algorithms",
+      "exam_dates": "Nov 28, Nov 30",
+      "daily_hours": 4,
+      "days": 3
     },
-    "expected_behavior": "No time overlaps, equal distribution of core study and problem solving."
+    "expected_output": "3-day non-overlapping timetable totaling ~4 hours/day with balanced theory and practice."
   },
   {
-    "test_id": "TC_02_TightDeadline",
-    "description": "Exam in 1 day with heavy syllabus",
+    "test_id": 2,
+    "type": "Normal",
+    "description": "4-day schedule for Operating Systems, DBMS, and Computer Networks",
     "inputs": {
-      "student_name": "Ritik Kumar",
-      "subjects": "Computer Networks, DBMS, Software Engineering",
-      "exam_timeline": "CN: Tomorrow",
-      "daily_hours": 8
+      "subjects": "Operating Systems, DBMS, Computer Networks",
+      "exam_dates": "Dec 02, Dec 05, Dec 08",
+      "daily_hours": 5,
+      "days": 4
     },
-    "expected_behavior": "Prioritizes CN heavily, compresses revision slots, remains valid JSON."
+    "expected_output": "4-day schedule prioritizing earlier exam dates with non-overlapping slots."
   },
   {
-    "test_id": "TC_03_LowHoursConstraint",
-    "description": "Extreme constraint: Only 1 available study hour per day",
+    "test_id": 3,
+    "type": "Normal",
+    "description": "2-day revision plan for Mathematics and Physics",
     "inputs": {
-      "student_name": "Ritik Kumar",
       "subjects": "Mathematics, Physics",
-      "exam_timeline": "Maths: Nov 25",
-      "daily_hours": 1
+      "exam_dates": "Nov 26, Nov 27",
+      "daily_hours": 3,
+      "days": 2
     },
-    "expected_behavior": "Fits compact 1-hour high-yield revision sessions without breaking schema."
+    "expected_output": "2-day plan alternating math problem-solving and physics revision within 3 hours/day."
+  },
+  {
+    "test_id": 4,
+    "type": "Normal",
+    "description": "3-day plan with heavy technical and lighter review subjects",
+    "inputs": {
+      "subjects": "Compiler Design, Software Engineering",
+      "exam_dates": "Dec 01, Dec 04",
+      "daily_hours": 4,
+      "days": 3
+    },
+    "expected_output": "Balanced daily slots alternating heavy technical topics with lighter review."
+  },
+  {
+    "test_id": 5,
+    "type": "Edge",
+    "description": "Very tight daily time limit: only 1 hour/day across 3 subjects",
+    "inputs": {
+      "subjects": "OS, DBMS, CN",
+      "exam_dates": "Tomorrow",
+      "daily_hours": 1,
+      "days": 2
+    },
+    "expected_output": "Compact 1-hour/day slots prioritizing urgent exam without exceeding 1 hour/day."
+  },
+  {
+    "test_id": 6,
+    "type": "Edge",
+    "description": "High workload: 5 subjects over 2 days with 6 hours/day",
+    "inputs": {
+      "subjects": "DS, Algo, OS, DBMS, CN",
+      "exam_dates": "Nov 24, Nov 25, Nov 26, Nov 27, Nov 28",
+      "daily_hours": 6,
+      "days": 2
+    },
+    "expected_output": "2-day timetable covering urgent topics within 6 hours/day without time overlaps."
+  },
+  {
+    "test_id": 7,
+    "type": "Edge",
+    "description": "Non-English / informal exam date phrasing",
+    "inputs": {
+      "subjects": "Linear Algebra, Digital Logic",
+      "exam_dates": "kal exam hai, parso dusra",
+      "daily_hours": 3,
+      "days": 2
+    },
+    "expected_output": "Graceful handling of informal date wording into a valid structured timetable."
+  },
+  {
+    "test_id": 8,
+    "type": "Invalid",
+    "description": "Zero available daily study hours",
+    "inputs": {
+      "subjects": "Data Structures, Algorithms",
+      "exam_dates": "Nov 25",
+      "daily_hours": 0,
+      "days": 3
+    },
+    "expected_output": "Clear validation/warning or zero study slots rather than scheduling hours when 0 are available."
+  },
+  {
+    "test_id": 9,
+    "type": "Invalid",
+    "description": "Negative daily study hours (-2)",
+    "inputs": {
+      "subjects": "Mathematics",
+      "exam_dates": "Nov 26",
+      "daily_hours": -2,
+      "days": 2
+    },
+    "expected_output": "Rejection or warning for invalid negative hours instead of generating negative/invalid durations."
+  },
+  {
+    "test_id": 10,
+    "type": "Invalid",
+    "description": "Empty subjects list",
+    "inputs": {
+      "subjects": "",
+      "exam_dates": "Nov 26",
+      "daily_hours": 4,
+      "days": 2
+    },
+    "expected_output": "Prompt/app asks for valid subject input rather than inventing unrelated subjects."
   }
 ]
